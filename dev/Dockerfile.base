@@ -1,0 +1,17 @@
+FROM debian:bookworm-slim
+
+# install Git and Vim
+RUN apt-get update && apt-get install -y curl git vim-nox
+
+# copy base Vim config
+COPY config/.vimrc.base /root/.vimrc
+
+# set up and install Vim plugins
+# see https://github.com/tpope/vim-pathogen
+RUN mkdir -p /root/.vim/autoload/ /root/.vim/bundle/
+RUN curl -LSso /root/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+WORKDIR /root/.vim/bundle/
+RUN for repository in https://github.com/tmhedberg/SimpylFold.git https://github.com/vim-syntastic/syntastic.git https://github.com/vim-airline/vim-airline.git https://github.com/vim-airline/vim-airline-themes.git ; do git clone "$repository"; done
+RUN mkdir /root/.vim/ftplugin/
+
+WORKDIR /root/

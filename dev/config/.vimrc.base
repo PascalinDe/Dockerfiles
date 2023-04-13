@@ -1,0 +1,75 @@
+scriptencoding utf-8
+
+" misc settings
+
+" set history length
+set history=100
+" save when switching buffer/losing focus
+autocmd BufLeave,FocusLost * wall
+" default encoding UTF-8
+set encoding=utf-8
+set fileencoding=utf-8
+" set backspace
+set backspace=indent,eol,start
+" open vertical split on the right side
+set splitright
+" write spaces instead of TAB
+set tabstop=4
+set expandtab
+
+" search
+
+" handle case
+set ignorecase
+set smartcase
+" highlight search results
+set hlsearch
+
+" display, colour schemes and highlighting
+
+" show current command
+set showcmd
+" show current position
+set ruler
+" show relative line number
+set number
+set relativenumber
+" show matching brackets
+set showmatch
+" show trailing whitespaces
+set list!
+set listchars=trail:¶
+" set colour scheme
+colorscheme desert
+set background=dark
+" change highlight color
+highlight Visual ctermbg=Yellow
+
+" syntax and filetype-specific behaviour
+
+" enable syntax highlighting
+syntax enable
+autocmd BufEnter * syntax sync fromstart
+" enable filetype-specific behaviour
+filetype on
+filetype plugin on
+filetype indent on
+
+" plugins
+
+" vim-pathogen
+execute pathogen#infect()
+" vim-airline
+set re=2
+set laststatus=2
+let g:airline#extensions#tabline#enabled=1
+" vim-airline-themes
+let g:airline_theme='alduin'
+" vim-syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_wq=0
